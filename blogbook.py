@@ -17,12 +17,12 @@ posts = [
     }
 ]
 
-app.route('/')
-app.route('/home')
+@app.route('/')
+@app.route('/home')
 def home():
     render_template('home.html', posts=posts)
 
-app.route('/about')
+@app.route('/about')
 def about():
     render_template('about.html', title='About')
 
