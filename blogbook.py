@@ -33,6 +33,7 @@ def about():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        print('here')
         flash(f'Account created for {form.username.data}!','success')
         return redirect(url_for('home'))
     return render_template('register.html',title ='Register',form=form)
