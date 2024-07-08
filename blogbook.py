@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -27,7 +27,7 @@ class User(db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default = datetime.utcnow)
+    date_posted = db.Column(db.DateTime, nullable=False, default = datetime.now(timezone.utc))
     content = db.Column(db.Text, nullable=False)
     user_id=db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
