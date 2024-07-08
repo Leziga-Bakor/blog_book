@@ -1,18 +1,7 @@
-from flask import Flask, render_template, url_for, flash, redirect, request
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from forms import RegistrationForm, LoginForm
-
-
-app = Flask(__name__)
-
-app.config['SECRET_KEY'] = 'cc36e909fbe851eca8de84699919c8b6e13d3b77'
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///site.db'
-
-db = SQLAlchemy(app)
-migrate = Migrate(app,db)
-
-from models import User, Post
+from flask import render_template, url_for, flash, redirect, request
+from blogbook import app
+from blogbook.forms import RegistrationForm, LoginForm
+from blogbook.models import User, Post
 
 posts = [
     {
@@ -60,7 +49,3 @@ def login():
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html',title ='Login',form=form)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)

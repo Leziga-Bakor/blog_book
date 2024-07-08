@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from __main__ import db
+from blogbook import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
