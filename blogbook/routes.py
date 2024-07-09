@@ -30,13 +30,10 @@ def about():
 @app.route('/register', methods=['GET','POST'])
 def register():
     form = RegistrationForm()
-    # print('Form Method:', request.method)
+    
     if form.validate_on_submit():
-        # print('Form is valid!')
         flash(f'Account created for {form.username.data}!','success')
         return redirect(url_for('home'))
-    # else:
-    #     print('Form Errors:', form.errors)
     return render_template('register.html',title ='Register',form=form)
 
 @app.route('/login', methods=['GET','POST'])
