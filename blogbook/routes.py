@@ -1,11 +1,8 @@
 from flask import render_template, url_for, flash, redirect, request
-from blogbook import app, db, bcrypt, login_manager
+from blogbook import app, db, bcrypt
 from blogbook.forms import RegistrationForm, LoginForm
 from blogbook.models import User, Post
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 posts = [
     {
