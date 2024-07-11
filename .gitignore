@@ -4,3 +4,5 @@ instance/
 migrations/
 __pycache__
 boot.html
+*.jpg
+*.png
