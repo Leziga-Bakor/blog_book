@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from blogbook import app, db, bcrypt
-from blogbook.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from blogbook.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from blogbook.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -99,7 +99,11 @@ def account():
     image_file = url_for('static',filename="profile_pics/" + current_user.image_file)
     return render_template('account.html',title ='Login', image_file=image_file, form=form)
 
-@app.route('/post/new')
+@app.route('/post/new',methods=['GET','POST'])
 @login_required
 def new_post():
-    return render_template('create_post.html',title='New Post')
+    form=PostForm()
+    if form.validate_on_submit():
+        flash('Your post has been created!','success')
+        return redirect(url_for('home'))
+    return render_template('create_post.html',title='New Post',form=form)
