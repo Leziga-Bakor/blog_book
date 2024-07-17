@@ -26,6 +26,7 @@ class User(db.Model, UserMixin):
         token = jwt.encode(header, payload, app.config['SECRET_KEY'])
         return token.decode('utf-8')
     
+    @staticmethod
     def verify_reset_token(token):
         try:
             claims = jwt.decode(token, app.config['SECRET_KEY'])
