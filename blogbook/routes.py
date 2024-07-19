@@ -152,7 +152,7 @@ def user_posts(username):
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Password Reset Request', 
-                  sender='noreply@demo.com', 
+                  sender='noreply@email.com', 
                   recipients=[user.email])
     msg.body = f''' To reset your password, visit the following link:
 {url_for('reset_token', token = token, _external =True)}
@@ -191,4 +191,4 @@ def reset_token(token):
         db.session.commit()
         flash(f'Your password has been updated! you are now able to log in','success')
         return redirect(url_for('login'))
-    return redirect('reset_token.html', title='Reset Password', form = form)
+    return render_template('reset_token.html', title='Reset Password', form = form)
