@@ -26,4 +26,10 @@ app.config['MAIL_USE_SSL'] = False
 mail = Mail(app)
 
 
-from blogbook import routes
+from blogbook.users.routes import users
+from blogbook.posts.routes import posts
+from blogbook.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)
