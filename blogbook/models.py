@@ -1,7 +1,8 @@
+from flask import current_app
 from datetime import datetime, timezone, timedelta
 from itsdangerous import URLSafeTimedSerializer as Serializer
 from authlib.jose import jwt
-from blogbook import db, login_manager, app
+from blogbook import db, login_manager
 from flask_login import UserMixin
 
 @login_manager.user_loader
@@ -23,13 +24,13 @@ class User(db.Model, UserMixin):
             'user_id':self.id,
             'exp': datetime.now(timezone.utc) + timedelta(seconds=expires_sec)
         }
-        token = jwt.encode(header, payload, app.config['SECRET_KEY'])
+        token = jwt.encode(header, payload, current_app.config['SECRET_KEY'])
         return token.decode('utf-8')
     
     @staticmethod
     def verify_reset_token(token):
         try:
-            claims = jwt.decode(token, app.config['SECRET_KEY'])
+            claims = jwt.decode(token, current_app.config['SECRET_KEY'])
             claims.validate()
             user_id = claims['user_id']
         except:
