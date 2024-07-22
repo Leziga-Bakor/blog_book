@@ -8,6 +8,15 @@ def error_404(error):
 
 @errors.app_errorhandler(403)
 def error_403(error):
+    """
+    Handles 403 Forbidden errors and returns the appropriate error page.
+
+    Args:
+        error: The error object containing details of the 403 error.
+
+    Returns:
+        A tuple containing the rendered 403 error template and the error code 403.
+    """
     return render_template('errors/403.html'), 403
 
 @errors.app_errorhandler(500)
